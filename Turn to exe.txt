@@ -1,0 +1,9 @@
+PS C:\Users\ZachP\Desktop\Stable EXE\PrintLayoutLabV1.82 - exe\GUIT> python3 -m PyInstaller --onefile --add-data "background;./background" --add-data "fonts;./fonts" --add-data "templates;./templates" --add-data "static;./static" app.py  --add-data "fonts_JEW;./fonts_JEW"
+
+pyarmor gen app.py
+PS C:\Users\ZachP\Desktop\PrintLayoutLab\GUIT> Get-ChildItem -Recurse -Include *.py | ForEach-Object { pyarmor gen --output dist --recursive $_.FullName }
+
+PS C:\Users\ZachP\Desktop\PrintLayoutLab - Copy (2)\GUIT> python -m PyInstaller --onefile --add-data "background;./background" --add-data "fonts;./fonts" --add-data "templates;./templates" --add-data "static;./static" --add-data "dist/pyarmor_runtime_000000;pyarmor_runtime_000000" dist\app.py 
+
+cd "C:\Users\ZachP\Desktop\PrintLayoutLab - Copy (2)\GUIT"  
+python -m PyInstaller --onefile --hidden-import=requests --hidden-import=config --hidden-import=img2pdf --add-data "background;./background" --add-data "fonts;./fonts" --add-data "templates;./templates" --add-data "static;./static" --add-data "fonts_JEW;./fonts_JEW" --add-data "dist/pyarmor_runtime_000000;pyarmor_runtime_000000" app.py 

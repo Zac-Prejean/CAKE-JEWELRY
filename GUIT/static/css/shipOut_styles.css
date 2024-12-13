@@ -1,0 +1,94 @@
+/* Left Container Styling */
+.left-container {
+  width: 40%;
+  padding: 15px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 20px;
+  height: 30vh; /* Full viewport height */
+  overflow-y: auto; /* Allow scroll if content overflows */
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Right Container Styling */
+.right-container {
+  width: 65%;
+  padding: 15px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Image List Container for Vertical Scroll */
+.image-list-container {
+  overflow-y: auto;
+  max-height: 80vh;
+  padding: 10px;
+}
+
+.image-list img {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+.button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: #218838;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Input Field Styling */
+.input-field {
+  width: 100%;
+  padding: 14px 18px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.json-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures the label and value are aligned horizontally with space in between */
+  font-size: 1.1em;
+  margin-bottom: 8px; /* Adds spacing between each item */
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+}
+
+.content {
+  padding: 0 12px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #555;
+  flex-grow: 1; /* Allows content to take available space to the right */
+  text-align: right; /* Aligns text to the right side */
+}

@@ -1,0 +1,88 @@
+
+
+/* PREVIEW AREA */
+.terminal {
+    width: 75%; 
+    height: 200px; 
+    overflow-y: scroll; 
+    white-space: pre-wrap;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif, monospace;
+    color: #00cc65;
+    background-color: #f9f9f9;
+    box-shadow:  #b3b3b3 0px 3px 8px;
+  }
+  
+  #preview-area {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ccc;
+    box-shadow:  #b3b3b3 0px 3px 8px;
+  }
+  
+  .preview-pdf {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  /* LABEL and PICK-LIST BUTTONS */
+.checkbox-wrapper-31:hover .check {
+    stroke-dashoffset: 0;
+  }
+  
+  .checkbox-wrapper-31 {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+  }
+  .checkbox-wrapper-31 .background {
+    fill: #ccc;
+    transition: ease all 0.6s;
+    -webkit-transition: ease all 0.6s;
+  }
+  .checkbox-wrapper-31 .stroke {
+    fill: none;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    stroke-width: 2px;
+    stroke-dashoffset: 100;
+    stroke-dasharray: 100;
+    transition: ease all 0.6s;
+    -webkit-transition: ease all 0.6s;
+  }
+  .checkbox-wrapper-31 .check {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2px;
+    stroke-dashoffset: 22;
+    stroke-dasharray: 22;
+    transition: ease all 0.6s;
+    -webkit-transition: ease all 0.6s;
+  }
+  .checkbox-wrapper-31 input[type=checkbox] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    opacity: 0;
+  }
+  .checkbox-wrapper-31 input[type=checkbox]:hover {
+    cursor: pointer;
+  }
+  .checkbox-wrapper-31 input[type=checkbox]:checked + svg .background {
+    fill: #00cc65;
+  }
+  .checkbox-wrapper-31 input[type=checkbox]:checked + svg .stroke {
+    stroke-dashoffset: 0;
+  }
+  .checkbox-wrapper-31 input[type=checkbox]:checked + svg .check {
+    stroke-dashoffset: 0;
+  }

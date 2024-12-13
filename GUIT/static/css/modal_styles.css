@@ -1,0 +1,142 @@
+
+:root {
+    --default-padding: 10px;
+  }
+  
+  body,
+  html {
+    height: 100%;
+    font-family: "Inter", sans-serif;
+    color: #331a46;
+    background: linear-gradient(to top, #7f00ff, #e100ff);
+    line-height: 1.4;
+  }
+  
+  body {
+    display: grid;
+    place-items: center;
+    background-image: url('https://source.unsplash.com/ruJm3dBXCqw/1600x900');
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .window {
+  
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    min-height: 300px;
+    border: 5px solid #5e2ae9;
+    box-shadow: 15px 15px 0 #5e2ae9;
+    max-width: 600px;
+    max-height: 500px;
+    background-color: #7f00ff;
+    filter: saturate(.1);
+    border-radius: 3px;
+
+    &:focus-within {
+      filter: saturate(1);
+    }
+    
+  }
+  
+  .window__title-bar {
+    background-color: #8c5afb;
+    color: white;
+    padding: 13px var(--default-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: default;
+    user-select: none;
+    z-index: 1;
+    box-shadow: 0px 5px 6px -2px #bb99ff5e;
+    
+  }
+  
+  .window__body {
+    flex-grow: 1;
+    background-color: white;
+    padding: var(--default-padding);
+    overflow-y: auto;
+    scrollbar-color: #4d21c3 #dfd4fd;
+    scrollbar-width: thin;
+  
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+      background-color: #dfd4fd;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: #4d21c3;
+    }
+  }
+  
+  .window__btn {
+    cursor: pointer;
+    background-color: #5e2ae9;
+    width: 20px;
+    height: 20px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    opacity: .8;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ae63e4;
+      
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .window__btn + .window__btn {
+    margin-left: 6px;
+  }
+  
+  .window__title {
+    line-height: 1;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  pre {
+    font-family: monospace;
+    background-color: #8c5afb;
+    color: white;
+    padding: 10px;
+    white-space: pre;
+    word-wrap: break-word;
+    overflow: auto;
+  }
+  
+  .window__status-bar {
+    padding: 3px var(--default-padding);
+    font-size: .75rem;
+    color: #ecd4ff;
+  }
+  
+  ::-moz-selection { 
+    color: white;
+    background: hotpink; 
+  }
+  ::selection { 
+    color: white;
+    background: hotpink; 
+  }
+  
+  .overlay {
+    display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(30px);
+    
+  }

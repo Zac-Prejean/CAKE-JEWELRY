@@ -1,0 +1,228 @@
+
+
+body {
+    background: #222;
+}
+
+/* CONTENT */  
+.designed-status {  
+    padding: 0px 25px;  
+    width: 100%;
+}  
+  
+.table-banner {  
+    background-color: #444;  
+    color: #FFF;  
+}  
+  
+.table td {  
+    padding: 1.5rem;  
+    color: #fff;  
+}  
+  
+.table th {  
+    border-top: 0px;  
+}  
+  
+.table thead th {  
+    border-bottom: 0px;  
+}  
+  
+/* PROGRESS BAR */  
+.bar-container {  
+    display: flex;  
+    align-items: center;  
+    justify-content: center; /* Center the progress bars */   
+    padding: 15px 25px;  
+    flex: 1; /* Allow it to grow and shrink */ 
+    max-width: 250px; 
+}  
+  
+.progress-container {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    gap: 40px;  
+}  
+  
+.progress-container .progressbar {  
+    position: relative;  
+    width: 150px;  
+    height: 150px;  
+    border-radius: 50%;  
+    background: #444 linear-gradient(to right, transparent 50%, var(--clr) 0);  
+}  
+  
+.progress-container .progressbar h3 {  
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+    font-size: 2.5em;  
+    z-index: 1;  
+    font-weight: 500;  
+}  
+  
+.progress-container .progressbar h3 span {  
+    font-size: 0.65em;  
+    font-weight: 400;  
+}  
+  
+.progress-container .progressbar img {  
+    position: absolute;  
+    top: 5%;  
+    left: 15%;  
+    transform: translate(-50%);  
+    font-weight: 500;  
+    z-index: 1;  
+}  
+  
+.progress-container .progressbar::before {  
+    content: '';  
+    display: block;  
+    height: 100%;  
+    margin-left: 50%;  
+    transform-origin: left;  
+    border-radius: 0 100% 100% 0/50%;  
+}  
+  
+.progress-container .progressbar::after {  
+    content: '';  
+    position: absolute;  
+    inset: 10px;  
+    border-radius: 50%;  
+    background: #222;  
+}  
+  
+.progress-container .progressbar.high::before {  
+    background: var(--clr);  
+    transform: rotate(calc(((var(--i) - 50) * 0.01turn)));  
+}  
+  
+.progress-container .progressbar.low::before {  
+    background: #444;  
+    transform: rotate(calc(((var(--i) - 0) * 0.01turn)));  
+}  
+ 
+.circle {  
+    height: 150px;  
+    width: 150px;  
+    border: 10px solid #444;  
+    border-radius: 50%;  
+    position: relative;  
+    display: inline-block;  
+}  
+  
+.started-text {  
+    color: #736B99;  
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);
+    margin: 0;  
+    text-align: center;  
+} 
+
+.ended-text {  
+    color: #BF5F97;  
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);
+    margin: 0;  
+    text-align: center;  
+} 
+  
+.stats-container {  
+    display: flex;  
+    flex-wrap: wrap; /* Allow wrapping if necessary */  
+}  
+  
+.chart-container {  
+    flex: 2; /* Allow it to grow and shrink */  
+    padding: 25px;  
+    background-color: #222;  
+    display: flex; /* Flex to allow centering the canvas */  
+    justify-content: center; /* Center the canvas horizontally */  
+    align-items: center; /* Center the canvas vertically */  
+}  
+  
+#employeeChart {  
+    width: 100%; /* Ensure it takes full width of the parent */  
+    max-height: 600px; /* Maintain aspect ratio */  
+}  
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between
+}
+.download-button-container {
+   padding: 25px; 
+}
+
+.navigation-buttons {  
+    padding: 25px;
+}  
+ 
+.backButton, .continueButton {  
+    margin-left: 10px;  /* Optional: Add space between buttons */  
+} 
+
+/* TABLE */
+.table-container {
+    width: 85%;
+    padding: 15px;
+}
+
+.dot-gold {  
+    height: 21px;  
+    width: 21px;  
+    border-radius: 50%;  
+    display: inline-block; 
+    background-color: gold; 
+}  
+.dot-silver {  
+    height: 18px;  
+    width: 18px;  
+    border-radius: 50%;  
+    display: inline-block; 
+    background-color: silver; 
+}  
+.dot-bronze {  
+    height: 15px;  
+    width: 15px;  
+    border-radius: 50%;  
+    display: inline-block; 
+    background-color: #cd7f32; 
+}  
+
+/* Media Queries for Responsive Design */  
+@media (max-width: 1335px) {  
+    .table-container {
+        width: 75%;
+    }
+}  
+
+@media (max-width: 1060px) {  
+    .table-container {
+        width: 55%;
+        padding: 10px;
+    }
+} 
+
+@media (max-width: 768px) {  
+    .stats-container {  
+        flex-direction: column;  
+        align-items: center;  
+    }  
+  
+    .bar-container, .chart-container {  
+        width: 100%;  
+        max-width: 100%;  
+    }  
+  
+    .chart-container {  
+        padding: 15px;  
+    }  
+}   

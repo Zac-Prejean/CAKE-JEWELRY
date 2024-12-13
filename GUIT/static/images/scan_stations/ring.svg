@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="Layer_1" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:svg="http://www.w3.org/2000/svg" inkscape:export-filename="ring.png"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800"
+	 style="enable-background:new 0 0 800 800;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_00000067952108462782425250000007047523762357388718_);}
+	.st1{fill:#FFFFFF;stroke:#03B5AA;stroke-miterlimit:10;}
+	.st2{fill:#03B5AA;stroke:#03B5AA;stroke-miterlimit:10;}
+</style>
+<sodipodi:namedview  bordercolor="#eeeeee" borderopacity="1" id="namedview3384" inkscape:current-layer="Layer_1" inkscape:cx="342.60475" inkscape:cy="307.88572" inkscape:deskcolor="#505050" inkscape:pagecheckerboard="0" inkscape:pageopacity="0" inkscape:showpageshadow="0" inkscape:window-height="1009" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="0.76327021" pagecolor="#505050" showgrid="false">
+	</sodipodi:namedview>
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M-36.8,247.5L92.8,746l744-193.5L707.2,54L-36.8,247.5z"/>
+	</defs>
+	<clipPath id="SVGID_00000014617589081131501190000014373600420759933577_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g style="clip-path:url(#SVGID_00000014617589081131501190000014373600420759933577_);">
+		<g>
+			<path class="st1" d="M136.5,220.2c68.4-34,159.8-54.1,257.4-56.6c97.5-2.5,189.9,12.8,259.9,43.3c73.8,32,115.1,78.3,116.5,130.3
+				l2.7,106.6c1.3,52-37.6,100.3-109.6,136.1c-68.4,34-159.8,54.1-257.4,56.6c-97.6,2.5-189.9-12.9-260-43.3
+				C72.3,561.2,31,514.9,29.6,462.9l-2.7-106.6C25.6,304.3,64.5,256,136.5,220.2L136.5,220.2z M649.9,305.5
+				c-68-29.6-158-44.5-253.5-42c-95.4,2.4-184.5,22-251,55c-41.8,20.8-71.8,46.2-86.2,71.9c15.7,25,47,48.7,89.8,67.3
+				c68,29.6,158,44.5,253.5,42s184.5-22,250.9-55c41.8-20.8,71.8-46.1,86.2-71.9C724,348,692.7,324.2,649.9,305.5L649.9,305.5z"/>
+			<path class="st2" d="M136.5,220.2c68.4-34,159.8-54.1,257.4-56.6s189.9,12.9,260,43.3c73.8,32,115.1,78.3,116.5,130.3l2.7,106.6
+				c1.4,52-37.6,100.3-109.6,136.1c-68.4,34-159.8,54.1-257.4,56.6s-189.9-12.9-260-43.3C72.3,561.1,31,514.8,29.6,462.9l-2.7-106.6
+				C25.5,304.3,64.5,255.9,136.5,220.2L136.5,220.2z M648.1,235.6c-68-29.5-158-44.5-253.5-42c-95.4,2.4-184.6,22-250.9,55
+				c-61,30.3-96.8,70.4-95.9,107.2c0.1,2.2,0.3,4.4,0.6,6.7c18.2-27.1,48.6-51.7,89.9-72.3c68.4-34,159.8-54.1,257.4-56.6
+				c97.6-2.5,189.9,12.9,260,43.3c42.3,18.4,73.9,41.4,93.5,67.6c0.2-2.2,0.3-4.5,0.2-6.7C748.4,300.9,710.5,262.7,648.1,235.6
+				L648.1,235.6z M59.3,390.5c15.7,25,47,48.7,89.8,67.3c68,29.5,158,44.5,253.5,42s184.6-22,250.9-55
+				c41.8-20.8,71.8-46.1,86.2-71.9c-15.7-25-47-48.8-89.8-67.4c-68-29.5-158-44.5-253.5-42s-184.6,22-250.9,55
+				C103.6,339.3,73.7,364.7,59.3,390.5L59.3,390.5z M49.5,418.5l1.1,43.9c0.9,36.8,38.8,74.9,101.2,102.1c68,29.5,158,44.5,253.5,42
+				c95.4-2.4,184.6-22,250.9-55c61-30.3,96.8-70.4,95.9-107.2l-1.1-43.9l0,0c-18.2,27.3-48.7,52.2-90.3,72.9
+				c-68.4,34-159.8,54.1-257.4,56.6c-97.6,2.5-189.9-12.9-260-43.3C100.7,468.1,68.9,444.8,49.5,418.5L49.5,418.5L49.5,418.5z"/>
+		</g>
+	</g>
+</g>
+</svg>

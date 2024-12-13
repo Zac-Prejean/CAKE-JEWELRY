@@ -1,0 +1,103 @@
+<!-- designer.html -->
+
+
+<!DOCTYPE html>  
+<html lang="en">  
+  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Designer</title>  
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link rel="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/designer_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>     
+</head>
+  
+<body>   
+  
+    <header class="text-center">  
+        <!-- Include the navbar -->
+        {% include 'navbar.html' %}
+    </header> 
+  
+<!-- CONTENT -->  
+  
+<div class="container text-center p-sm-2 p-md-5">  
+  
+    <div class="bounding_box m-3"> 
+    <div class="p-4">  
+        <h2>Designer</h2>  
+        <p>browse for a updated .CSV file from PreCheck and hit submit to start the design process</p>  
+    </div>  
+  
+    <!-- Buttoms --> 
+        <img src="{{ url_for('static', filename='images/expedited_order.svg') }}" width="40" height="40" class="icon d-inline-block align-center" alt="Expedited Order Logo" data-toggle="tooltip" data-placement="top" 
+        title="expedited order">
+        <img src="{{ url_for('static', filename='images/multi_line.svg') }}" width="40" height="40" class="icon d-inline-block align-center" alt="Multi-Line Order Logo"data-toggle="tooltip" data-placement="top" 
+        title="multi-line order">  
+        <img src="{{ url_for('static', filename='images/multi_order.svg') }}" width="40" height="40" class="icon d-inline-block align-center" alt="Multi Order Logo"data-toggle="tooltip" data-placement="top" 
+        title="multi order"> 
+        <img src="{{ url_for('static', filename='images/duplacate_order.svg') }}" width="40" height="40" class="icon d-inline-block align-center" alt="Duplacate Order Logo"data-toggle="tooltip" data-placement="top" 
+        title="duplacate order">
+    </div>
+
+    <!-- <div class="container p-3">  
+        <div class="d-inline-flex">  
+            <div class="checkbox-wrapper-31 m-1">  
+                <input type="checkbox" id="folderOrganizationCheckbox"/>  
+                <svg viewBox="0 0 35.6 35.6">  
+                    <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>  
+                    <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>  
+                    <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>  
+                </svg>  
+            </div>  
+            <label for="folderOrganizationCheckbox" class="m-1">NON-ML</label>   
+        </div>  
+        <div class="d-inline-flex"></div>  
+    </div>   -->
+    
+    <!-- <div class="container p-3">  
+        <form action="/run-script" method="post" enctype="multipart/form-data">  
+            <a class="navbar-brand m-0" href="{{ url_for('precheck') }}">  
+                <img src="{{ url_for('static', filename='images/precheck_green.svg') }}" width="40" height="40" class="icon d-inline-block align-center m-2" alt="PreCheck Link">  
+            </a>  
+            <input type="file" name="csv_file" accept=".csv">  
+            <button class="button" type="submit">Submit</button> 
+        </form>  
+
+        <div class="terminal" id="terminalOutput"></div>  
+    </div>   -->
+    <div class="container p-3">  
+        <form action="/run-script" method="post" enctype="multipart/form-data">  
+            <a class="navbar-brand m-0" href="{{ url_for('precheck') }}">  
+                <img src="{{ url_for('static', filename='images/precheck_green.svg') }}" width="40" height="40" class="icon d-inline-block align-center m-2" alt="PreCheck Link">  
+            </a>  
+            <a class="navbar-brand m-0" href="{{ url_for('templatemerger') }}">  
+                <img src="{{ url_for('static', filename='images/template_green.svg') }}" width="40" height="40" class="icon d-inline-block align-center m-2" alt="PreCheck Link">  
+            </a>  
+            <input type="file" name="csv_file" accept=".csv">  
+            <input type="checkbox" id="folderOrganizationCheckbox" name="folderOrganizationCheckbox"/>  
+            <label for="folderOrganizationCheckbox" class="m-1">NON-ML</label>  
+            <button class="button" type="submit">Submit</button>  
+        </form>  
+        <div class="terminal" id="terminalOutput"></div>  
+    </div>  
+</div>  
+  
+<!-- TERMINAL OUTPUT -->  
+  
+<div id="result"></div>  
+  
+<script src="{{ url_for('static', filename='js/config.js') }}"></script>
+<script src="{{ url_for('static', filename='js/designer.js') }}"></script>  
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>  
+</html>  

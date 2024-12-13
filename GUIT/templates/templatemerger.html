@@ -1,0 +1,78 @@
+<!-- templateMerger.html -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>TemplateMerger</title> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel ="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head> 
+<body>
+
+  <header class="text-center">  
+    <!-- Include the navbar -->
+    {% include 'navbar.html' %}
+</header> 
+
+  <!-- CONTENT -->
+
+  <div class="container text-center p-md-5">
+
+    <div class="bounding_box m-3">
+      <div class="p-4">
+        <h2>TemplateMerger</h2>
+        <p>choose a format and browse the downloaded images to export into the desired template</p>
+      </div>
+    </div>
+    
+  <!-- DROPDOWN  and BROWES KEY-->
+  <div class="dropdown mt-3">
+    <div class="row p-3 align-items-center">
+    <a class="navbar-brand m-0" href="{{ url_for('designer') }}">  
+        <img src="{{ url_for('static', filename='images/designer_green.svg') }}" width="40" height="40" class="icon d-inline-block align-center m-2" alt="PreCheck Link">  
+    </a>  
+    <button class="btn btn-secondary dropdown-toggle col" type="button" id="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <h3 id="format-btn">Choose a Format</h3>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li id="rings"><a href="#" class="dropdown-item"><img src="{{ url_for('static', filename='images/ring.svg') }}" width="18" height="18" class="d-inline-block align-center" alt="Click to add rings">
+        Rings</a></li>
+      <li id="necklace"><a href="#" class="dropdown-item"><img src="{{ url_for('static', filename='images/1_necklace.svg') }}" width="18" height="18" class="d-inline-block align-center" alt="Click to add one name necklace">
+        Necklace</a></li>
+      <!-- <li id="one-name-necklace"><a href="#" class="dropdown-item"><img src="{{ url_for('static', filename='images/1_necklace.svg') }}" width="18" height="18" class="d-inline-block align-center" alt="Click to add one name necklace">
+        One Name Necklace</a></li>
+      <li id="two-name-necklace"><a href="#" class="dropdown-item"><img src="{{ url_for('static', filename='images/2_necklace.svg') }}" width="18" height="18" class="d-inline-block align-center" alt="Click to add two name necklace">
+        Two Name Necklace</a></li>
+      <li id="three-name-necklace"><a href="#" class="dropdown-item"><img src="{{ url_for('static', filename='images/3_necklace.svg') }}" width="18" height="18" class="d-inline-block align-center" alt="Click to add three name necklace">
+        Three Name Necklace</a></li>
+      <li id="four-name-necklace"><a href="#" class="dropdown-item"><img src="{{ url_for('static', filename='images/4_necklace.svg') }}" width="18" height="18" class="d-inline-block align-center" alt="Click to add four name necklace">
+        Four Name Necklace</a></li> -->
+    </ul>
+    <div class="col">
+    <input type="file" id="file-input" accept=".png" multiple>
+    </div>
+  </div>
+  </div>
+
+  <!-- EXPORT BUTTON-->
+    <div class="container p-sm-2">
+      <button class="button" type="button" id="export-button">Export PNG</button>
+    </div>
+    <div id="preview-area"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/templatemerger.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script> 
+  
+</body>
+</html>
+

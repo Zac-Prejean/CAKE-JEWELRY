@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+  <body>
+<header class="text-center">  
+  
+    <!-- NAV -->  
+    <nav>
+        <div class="wrapper">
+            <div class="cakeLogo">  
+                <a href="#"><img src="{{ url_for('static', filename='images/CakeSiteLogo.svg') }}" alt="Cake Logo"></a>  
+            </div> 
+            <input type="radio" name="slider" id="menu-btn">
+            <input type="radio" name="slider" id="close-btn">
+            <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('admin') }}">Admin</a></li>
+            <li>
+                <button id="productionBtn" class="desktop-item production-btn">Production</button>   
+                <button id="productionBtnMobile" class="mobile-item production-btn">Production</button>
+                <div class="mega-box">
+                <div class="content">
+                    <div class="navrow jimjim">
+                    <img src="{{ url_for('static', filename='images/home/Imwatchingyou_edit.png') }}" class="jimjim" alt="Jimmy is Watching">
+                    </div>
+                    <div class="navrow">
+                    <header class="dropdown-header">PrintLayotLab</header>  
+                    <ul class="mega-links dropdown-links">
+                        <li><a class="m-0" href="{{ url_for('precheck') }}">  
+                        <img src="{{ url_for('static', filename='images/precheck.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Precheck Logo">  
+                    Precheck</a></li>
+                        <li><a class="m-0" href="{{ url_for('designer') }}">
+                        <img src="{{ url_for('static', filename='images/designer.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Template Logo">
+                    Designer</a></li>
+                        <li><a class="m-0" href="{{ url_for('templatemerger') }}">  
+                        <img src="{{ url_for('static', filename='images/template.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Designer Logo">  
+                    TemplateMerger</a></li>
+                    </ul>
+                    </div>
+                    <div class="navrow">  
+                    <header class="dropdown-header">ScanStations</header>  
+                    <ul class="mega-links dropdown-links">
+                        <li><a href="{{ url_for('scanIn') }}"><img src="{{ url_for('static', filename='images/scanIn.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Scan-In Logo">
+                        Scan-In</a></li>
+                        <li><a href="{{ url_for('printStation') }}"><img src="{{ url_for('static', filename='images/printstation.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Print Logo">
+                        PrintStation</a></li>
+                        <li><a href="{{ url_for('scanOut') }}"><img src="{{ url_for('static', filename='images/scanOut.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Scan-out Logo">
+                        Scan-Out</a></li>
+                        <li><a href="{{ url_for('redo') }}"><img src="{{ url_for('static', filename='images/redo.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Tally Logo">
+                        Redo-Page</a></li>
+                    </ul>
+                    </div>
+                    <div class="navrow">  
+                    <header class="dropdown-header">ShippingStations</header>  
+                    <ul class="mega-links dropdown-links"> 
+                        <li><a href="{{ url_for('cubbysystem') }}"><img src="{{ url_for('static', filename='images/cubbyhole.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="CubbyHole Logo">
+                        CubbyHole</a></li>
+                        <li><a href="{{ url_for('shipOut') }}"><img src="{{ url_for('static', filename='images/shipping.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Ship-Out Logo">
+                        Ship-Out</a></li>
+                        <li><a href="{{ url_for('tallyPage') }}"><img src="{{ url_for('static', filename='images/tally.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Tally Logo">
+                        Tally-Page</a></li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+            </li> 
+            </ul>
+            <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+    </nav>
+
+</header>  
+</body>
+
+</html>

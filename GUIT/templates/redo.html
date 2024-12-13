@@ -1,0 +1,88 @@
+<!DOCTYPE html>  
+<html lang="en">  
+  <head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Redo Station</title>  
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link rel="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shipOut_styles.css') }}">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+  </head>  
+  <body>  
+    <header class="text-center">  
+      <!-- Include the navbar -->  
+      {% include 'navbar.html' %}  
+    </header>  
+    <div>  
+      <div class="signedInUser" id="signedInUser"></div>  
+    </div>  
+    <!-- SIGN-IN MODAL -->  
+    <div id="signinModal" class="modal" tabindex="-1" role="dialog">  
+      <div class="modal-dialog" role="document">  
+        <div class="modal-content">  
+          <div class="passwordBanner">  
+            <h4>SIGN-IN</h4>  
+          </div>  
+          <div class="modal-body">  
+            <h5>Employee ID is needed to sign into stations.</h5>  
+            <input type="password" id="signinPasswordInput" class="form-control" placeholder="Employee ID">  
+          </div>  
+          <div class="modal-footer">  
+            <button type="button" class="btn btn-primary signinSubmitButton">SUBMIT</button>  
+          </div>  
+        </div>  
+      </div>  
+    </div>  
+    <main>  
+      <!-- BANNER -->  
+      <div class="main-container">  
+        <div class="main">  
+          <div class="text-center p-4">  
+            <h1>Redo Station</h1>  
+          </div>  
+          <!-- scan bar -->  
+          <div class="container">  
+            <div class="left-container">  
+              <h2>Order Information</h2>  
+              <p>  
+                Welcome to the redo station <br>Please Fill out the required fields <br>After you submit the item will be added to the next C_Reprocess batch. C_Reprocess batches should occur at least once daily.  
+              </p>  
+            </div>  
+            <div class="right-container">  
+              <form id="redoForm">  
+                <input type="text" id="barcode" class="input-field" placeholder="Scan Order here" required>  
+                <input type="text" id="itemBarcode" class="input-field" placeholder="Scan Item ID here" required>  
+                <select id="reason_string" class="input-field" required>  
+                  <option value="" disabled selected>Select a reason</option>  
+                  <option value="Wrong Item">Wrong Item</option>  
+                  <option value="Wrong Size">Wrong Size</option>  
+                  <option value="Wrong Color">Wrong Color</option>  
+                  <option value="Missing Item">Missing Item</option>  
+                  <option value="Bad Plating">Bad Plating</option>  
+                  <option value="Bad Sanding">Bad Sanding</option> 
+                  <option value="Opperator Error">Opperator Error</option>
+                  <option value="QC Fail">QC Fail</option>  
+                </select>  
+                <p id="message"></p>  
+                <button type="button" class="button" id="redobutton">Submit Order For Redo</button>  
+              </form>  
+            </div>  
+          </div>  
+        </div>  
+    </main>  
+    <script>const blankImagePath = "{{ blank_image_path }}";</script>  
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/penguin.js') }}"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/redo.js') }}"></script>  
+  </body>  
+</html>  

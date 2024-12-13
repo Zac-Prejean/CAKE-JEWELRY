@@ -1,0 +1,130 @@
+<!DOCTYPE html>  
+<html lang="en">  
+  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Admin</title>  
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link rel="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>     
+</head>
+  
+<body id="admin-page">  
+  
+        <!-- NAV -->
+        <header class="text-center">  
+            {% include 'navbar.html' %}  
+        </header> 
+
+    <!-- BANNER -->  
+    <div class="search-container">  
+        <div class="banner">  
+            <!-- scan bar -->  
+            <form onsubmit="event.preventDefault(); searchItemTag(document.getElementsByName('scanned_number')[0].value);" class="search-bar">  
+                <input type="search" name="scanned_number" pattern=".*\S.*" required>  
+                <button class="search-btn" type="submit">  
+                    <span>SEARCH</span>  
+                </button>  
+            </form>  
+        </div>  
+    </div>  
+
+    <!-- PASSWORD MODAL -->
+    <div id="passwordModal" class="modal" tabindex="-1" role="dialog">  
+        <div class="modal-dialog" role="document">  
+          <div class="modal-content">                
+            <div class="passwordBanner">ENTER PASSWORD</div>   
+            <div class="modal-body">  
+              <input type="password" id="passwordInput" class="form-control" placeholder="Password">  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-primary submitButton">SUBMIT</button> 
+            </div>  
+          </div>  
+        </div>  
+      </div>  
+  
+    <!-- CONTENT -->  
+    <div class="content-container" style="display: none;">  
+        <div class="database-status">  
+            <div class="date-filter-container mb-2">  
+                <input type="date" id="startDate" placeholder="Start Date">  
+                <input type="date" id="endDate" placeholder="End Date">  
+                <button class="btn btn-primary" onclick="filterByDate()">Filter</button>  
+            </div>  
+            <table class="table table-striped" id="database-table">  
+                <thead>  
+                    <tr>  
+                        <th class="table-banner">Item ID</th>  
+                        <th class="table-banner">Group ID</th>  
+                        <th class="table-banner">Order Number</th>  
+                        <th class="table-banner">SKU</th>  
+                        <th class="table-banner">Status</th> 
+                        <th class="table-banner">Description</th>   
+                        <th class="table-banner">Last Scan</th>  
+                        <th class="table-banner">Scanned By</th>  
+                        <th class="table-banner">Qty</th>  
+                        <th class="table-banner">CUBBY</th>  
+                        <th class="table-banner">Order Date</th>  
+                    </tr>  
+                </thead>  
+                <tbody>  
+                    {% if data %}  
+                    {% for item in data %}  
+                    <tr>  
+                        <td>{{ item.line_id }}</td>  
+                        <td>{{ item.custom_id }}</td>  
+                        <td>{{ item.order_id }}</td>  
+                        <td class="sku-box">{{ item.sku }}</td>  
+                        <td>  
+                            <form action="{{ url_for('admin_update_status') }}" method="POST">  
+                                <input type="hidden" name="line_id" value="{{ item.line_id }}">  
+                                <input type="hidden" name="order_id" value="{{ item.order_id }}">  
+                                <select name="status">  
+                                    <option value="Batched" {% if item.status == 'Batched' %}selected{% endif %}>Batched</option>  
+                                    <option value="Scanned-In" {% if item.status == 'Scanned-In' %}selected{% endif %}>Scanned-In</option>  
+                                    <option value="Printed" {% if item.status == 'Printed' %}selected{% endif %}>Printed</option>  
+                                    <option value="Scanned-Out" {% if item.status == 'Scanned-Out' %}selected{% endif %}>Scanned-Out</option>  
+                                    <option value="Cubby" {% if item.status == 'Cubby' %}selected{% endif %}>Cubby</option>  
+                                    <option value="Shipped" {% if item.status == 'Shipped' %}selected{% endif %}>Shipped</option>  
+                                    <option value="ERROR" {% if item.status == 'ERROR' %}selected{% endif %}>ERROR</option>                                    
+                                </select>  
+                            </form>  
+                        </td> 
+                        <td class="sku-box">{{ item.description }}</td>
+                        <td>{{ item.datetime }}</td>  
+                        <td>{{ item.scannedby }}</td>  
+                        <td>{{ item.qty }}</td>  
+                        <td>{{ item.cubby }}</td>  
+                        <td>{{ item.order_date }}</td>   
+                        <!-- <td>  
+                            <button class="btn btn-danger delete-button" data-line-id="{{ item.line_id }}" data-order-id="{{ item.order_id }}">Delete</button>  
+                        </td>   -->
+                        </tr>  
+                        {% endfor %}  
+                    {% else %}  
+                        <tr>  
+                            <td colspan="10">No data available</td>  
+                        </tr>  
+                    {% endif %}  
+                </tbody>                                            
+            </table>  
+        </div>  
+    </div>  
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>  
+</body> 
+</html> 

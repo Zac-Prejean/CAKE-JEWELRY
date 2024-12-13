@@ -1,0 +1,250 @@
+<!-- home.html -->
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Home</title> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel ="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+
+  <body>
+
+    <header class="text-center">  
+      <!-- Include the navbar -->
+      {% include 'navbar.html' %}
+  </header> 
+
+    <div class="container mt-5">
+      <div class="row">
+
+        <!-- BANNER -->
+        <div class="col-12 col-md-8 col-lg-9 text-center">
+          <img id="image" src="" class="img-fluid" alt="Completeful Banner based on date">  
+        </div>
+        
+        <!-- TABLE OF CONTENT -->
+        <div class="col-md-4 col-lg-3 d-none d-md-block"> 
+          <div class="shadow p-3 m-2 bg-light rounded">  
+            <h3>Table of contents</h3>  
+            <ul> 
+              <h5>Print Layout Lab</h5>
+              <li><a href="#shipstation" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">How to get started with ShipStation and the AutoDesigner</a></li>  
+              <li><a href="#precheck" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">What to look for in Precheck</a></li>  
+              <li><a href="#design" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Designing and after-check with the Design page</a></li>  
+              <li><a href="#templatemerger" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">When to use the TemplateMerger</a></li>  
+              <h5>Scan Stations</h5>
+              <li><a href="#scanStations" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Item Display and Status Update Process</a></li>  
+              <li><a href="#cubbyhole" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Using the CubbyHole System for Storing Multiple Items</a></li>  
+              <li><a href="#shipping" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Shipping Out and Admin Privileges</a></li> 
+              <li><a href="#warnings" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Warnings and Confirmation</a></li> 
+            </ul>  
+          </div> 
+        </div>
+ 
+        <!-- MEAT -->
+        <div class="col-12 col-md-8 col-lg-9 shadow-sm bg-white rounded text-center">   
+          <div id="shipstation">  
+            <img src="{{ url_for('static', filename='images/ShipStation_color_logo.svg') }}" width="60" height="60" class="m-3 d-inline-block align-center" alt="Designer Logo">  
+              <div>  
+                <h3>How to get started with ShipStation and the AutoDesigner</h3>  
+                <ol>
+                  <li>Access ShipStation using your personal login credentials.</li>
+                  <li>Choose the orders you wish to design, prioritizing them based on order date or priority level.</li>
+                  <li>Navigate to the "Other Actions" tab located at the top of the page, and find "Export Orders".</li>
+                  <img src="{{ url_for('static', filename='images/home/export_order.png') }}" class="img-fluid shadow-sm" alt="Completeful Banner">
+                  <li>Select the "Export Line Items" option, followed by "Item Skus W Options."</li>
+                  <img src="{{ url_for('static', filename='images/home/item_skus_with_options.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                  <li>Click on the "Export" button to complete the process.</li>
+                  <li>Proceed to the Precheck.</li>
+                  <a href="https://ship7.shipstation.com/orders/awaiting-shipment" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to ShipStation</a>
+                </ol>  
+              </div>
+            </div> 
+            <hr>
+          <div id="precheck">  
+            <img src="{{ url_for('static', filename='images/precheck_green.svg') }}" width="60" height="60" class="m-3 d-inline-block align-center" alt="Designer Logo">  
+              <div>  
+                <h3>What to look for in Precheck</h3> 
+                <p>ALL ORDERS MUST GO THROUGH THE PRECHECK! The PreCheck page handles CSV files containing product information and personalization 
+                  data. It allows users to upload a CSV file, preview and edit the personalization fields, 
+                  validate SKUs, and download an updated CSV file with the changes.</p>
+                <ol>
+                  <li>Locate and open the CSV file obtained from ShipStation</li>
+                  <li>Review each order meticulously, checking for any inconsistencies or anomalies.</li>                  
+                  <img src="{{ url_for('static', filename='images/home/precheck.png') }}" class="img-fluid shadow-sm" alt="Completeful Banner">
+                  <li>Take note of the different markings next to the order SKU, which indicate the following:
+                    <ul>
+                      <img src="{{ url_for('static', filename='images/good_check.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Good Check Logo"data-toggle="tooltip" data-placement="top">
+                      <li>Green mark - The order is recognized and ready for designing.</li>
+                      <img src="{{ url_for('static', filename='images/unknown_design.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Missing Design Logo"data-toggle="tooltip" data-placement="top">
+                      <li>Red mark - The order is unrecognized and cannot be designed.</li>
+                      <img src="{{ url_for('static', filename='images/missing_field.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Missing Field Logo" data-toggle="tooltip" data-placement="top">
+                      <li>Yellow mark - The order has a varying number of personalization lines, requiring close attention during the design process.</li>
+                      <img src="{{ url_for('static', filename='images/error_check.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Error Check Logo"data-toggle="tooltip" data-placement="top">
+                      <li> Red mark with a bug - The order has an unusual setup in the CSV file, which may lead to incorrect designing. Proceed with caution.</li>
+                      <img src="{{ url_for('static', filename='images/minus.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Delete Logo"data-toggle="tooltip" data-placement="top">
+                    </ul>
+                  </li>
+                  <li>Utilize the "Cancel" button to remove any items with a red mark from the CSV file. Please note that this action will only remove the individual item, not the entire order.</li>
+                  <p>By following these steps, you can efficiently manage and design orders based on their corresponding status indicators.</p>
+                  <a href="{{ url_for('precheck') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the Precheck Page</a>
+                </ol>  
+              </div>
+            </div>
+            <hr>
+            <div id="design">  
+              <img src="{{ url_for('static', filename='images/designer_green.svg') }}" width="60" height="60" class="m-3 d-inline-block align-center" alt="Designer Logo">  
+                <div>  
+                  <h3>Designing and after-check with the Design page</h3> 
+                  <p>The Designer page processes a CSV file containing 
+                    product information and generates personalized images for each product based on 
+                    the user's input. The images are saved to the user's 'Downloads' folder.</p>
+                  <ol>
+                    <li>Locate the "updated_csv" file in the Downloads folder, which was generated in the previous step, by pressing the browse button.</li>
+                    <li>Upload and submit the CSV file. Select the necessary checkmarks if Labels or a Pick List are required. Monitor the progress window at the bottom of the screen, which will confirm when the design process is complete.</li>
+                    <img src="{{ url_for('static', filename='images/home/label_pick_list.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                    <li>Access the newly created designs in the Downloads folder. These designs will be named with the current date, time, and an index number.</li>
+                    <img src="{{ url_for('static', filename='images/home/download_folder.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                    <li>Thoroughly review each design to ensure its accuracy. This step serves as the final quality control checkpoint before proceeding to the printing stage. Exercise caution and attention to detail.</li>
+                    <li>In some departments, specific symbols are used during the shipping process to facilitate smoother operations. These symbols include:
+                      <ul>
+                        <img src="{{ url_for('static', filename='images/expedited_order.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Good Check Logo"data-toggle="tooltip" data-placement="top">
+                        <li>Rabbit: This symbol indicates that the order is either expedited or a redo, requiring prompt attention and faster processing.</li>
+                        <img src="{{ url_for('static', filename='images/multi_order.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Missing Design Logo"data-toggle="tooltip" data-placement="top">
+                        <li>Shipping box: This symbol signifies that the order contains more than one item. If possible, these items should be kept together to maintain efficiency.</li>
+                        <img src="{{ url_for('static', filename='images/duplacate_order.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Missing Field Logo" data-toggle="tooltip" data-placement="top">
+                        <li>Multiple cubes: This symbol represents that the order consists of multiple instances of the same design on different items. It is crucial to ensure consistency across the various items.</li>
+                        <img src="{{ url_for('static', filename='images/multi_line.svg') }}" width="50" height="50" class="icon d-inline-block align-center" alt="Error Check Logo"data-toggle="tooltip" data-placement="top">
+                        <li>Multiple tags: This symbol denotes that the order includes multiple SKUs. Pay close attention to the different product types and their respective design requirements when processing these orders.</li>
+                        <img src="{{ url_for('static', filename='images/home/label_symbols.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                      </ul>
+                    </li>
+
+                    <p>By following these steps, you can efficiently manage and verify the design process, ensuring that all designs are accurate before moving on to the printing phase.</p>
+                    <a href="{{ url_for('designer') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the Design Page</a>
+                  </ol>  
+                </div>
+              </div>
+              <hr>
+              <div id="templatemerger">  
+                <img src="{{ url_for('static', filename='images/template_green.svg') }}" width="60" height="60" class="m-3 d-inline-block align-center" alt="Template Merger Logo">  
+                  <div>  
+                    <h3>When to use the TemplateMerger</h3> 
+                    <p>The Template Merger Page is for processing and combining multiple 
+                        images loaded by the user. It also provides a preview for the final combined 
+                        image.When processing large batches of prints simultaneously, follow these steps 
+                        using the TemplateMerger:</p>
+                    <ol>
+                      <li>Select the appropriate item format from the format bar, ensuring it matches the products to be printed on.</li>
+                      <li>Browse the Downloads folder to locate the accurate designs that were created and verified in the previous steps.</li>
+                      <li>Click "Export" to initiate the batch printing process. Please note that these files can be quite large, and it may take some time for the browser to generate them.</li>
+                      <li>If you encounter an issue where the downloaded file size is "0 bytes" and appears blank when viewed as a .png, it might be a browser-specific problem. To resolve this issue:</li>
+                      <ul>
+                        <li>Close your current browser.</li>
+                        <li>Open a different web browser (e.g., Google Chrome, Mozilla Firefox, Microsoft Edge, or Safari).</li>
+                        <li>Repeat the previous steps for creating and exporting large batches of prints using the TemplateMerger in the new browser.</li>
+                      </ul>
+                      <p>By following this procedure, you can efficiently create large batches of prints while maintaining consistency and quality throughout the process.</p>
+                      <a href="{{ url_for('templatemerger') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the TemplateMerger Page</a>
+                    </ol>  
+                  </div>
+                </div>
+                <hr>
+                <div id="scanStations">  
+                  <img src="{{ url_for('static', filename='images/scanStations_green.svg') }}" width="180" height="60" class="m-3 d-inline-block align-center" alt="Scan-In Logo">  
+                    <div>  
+                      <h3>Item Display and Status Update Process</h3> 
+                      <p>This process fetches item details, images, and status updates 
+                        from a server and displays the information on a web page. The 
+                        "Scan-In" page is the first step of this process. With the Scan-In 
+                        the user accepts the picked items and prepares them to be printed on.</p>
+                        <ol>
+                        <li>Scan the Item-ID QR code on the given label.</li>
+                        <li>An image will appear on screen with a indicator to the side on which the item needs to be printed on.</li>
+                        <img src="{{ url_for('static', filename='images/home/scanIn.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                        <li>The Print Station enables users to view a final sample image for evaluating the item's placement before proceeding.</li>
+                        <li>The numbers must be scanned using the AutoHotKeys tab. To ensure proper functionality, this station should be opened with Google Chrome and have access to the Everything Folder.</li>
+                        <img src="{{ url_for('static', filename='images/home/scanOut.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                        <li>Lastly, there is the Scan-Out Station, which serves as the final quality control checkpoint for most orders. Users must ensure that all information in the item image and details is accurate before proceeding further.</li>
+                        <li>A <a href="#warnings" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">confirmation notification</a> will appear for each scanned number. Once confirmed, the shipping label will automatically print for the item, unless the order contains multiple items. In that case, the CubbyHole system is utilized to manage multi-item orders.</li>
+                        </ol>
+                        <a href="{{ url_for('scanIn') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the Scan-In Station</a>
+                      </ol>  
+                    </div>
+                  </div>
+                  <hr>
+                  <div id="cubbyhole">  
+                    <img src="{{ url_for('static', filename='images/cubbyhole_green.svg') }}" width="60" height="60" class="m-3 d-inline-block align-center" alt="CubbyHole Logo">  
+                      <div>  
+                        <h3>Using the CubbyHole System for Storing Multiple Items</h3> 
+                        <p></p>
+                          <ol>
+                          <li>Scan the Item-ID QR code on the given label.</li>
+                          <li>An image will appear on screen with a indicator to the side on which the item needs to be printed on.</li>
+                          <img src="{{ url_for('static', filename='images/home/scanIn.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                          </ol>
+                          <a href="{{ url_for('scanIn') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the Scan-In Station</a>
+                        </ol>  
+                      </div>
+                    </div>
+                    <hr>
+                    <div id="shipping">  
+                      <img src="{{ url_for('static', filename='images/shipping_green.svg') }}" width="60" height="60" class="m-3 d-inline-block align-center" alt="Shipping Logo">  
+                        <div>  
+                          <h3>Shipping Out and Admin Privileges</h3> 
+                          <p></p>
+                            <ol>
+                            <li>Scan the Item-ID QR code on the given label.</li>
+                            <li>An image will appear on screen with a indicator to the side on which the item needs to be printed on.</li>
+                            <img src="{{ url_for('static', filename='images/home/scanIn.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                            <li>The Print Station enables users to view a final sample image for evaluating the item's placement before proceeding.</li>
+                            <li>The numbers must be scanned using the AutoHotKeys tab. To ensure proper functionality, this station should be opened with Google Chrome and have access to the Everything Folder.</li>
+                            <img src="{{ url_for('static', filename='images/home/scanOut.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                            <li>Lastly, there is the Scan-Out Station, which serves as the final quality control checkpoint for most orders. Users must ensure that all information in the item image and details is accurate before proceeding further.</li>
+                            <li>A <a href="#warnings" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">confirmation notification</a> will appear for each scanned number. Once confirmed, the shipping label will automatically print for the item, unless the order contains multiple items. In that case, the CubbyHole system is utilized to manage multi-item orders.</li>
+                            </ol>
+                            <a href="{{ url_for('scanIn') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the Scan-In Station</a>
+                          </ol>  
+                        </div>
+                      </div>
+                      <hr>
+                      <div id="warnings">  
+                        <img src="{{ url_for('static', filename='images/warnings_green.svg') }}" width="120" height="60" class="m-3 d-inline-block align-center" alt="Warnings Logo">  
+                          <div>  
+                            <h3>Warnings and Confirmation</h3> 
+                            <p></p>
+                              <ol>
+                              <li>Scan the Item-ID QR code on the given label.</li>
+                              <li>An image will appear on screen with a indicator to the side on which the item needs to be printed on.</li>
+                              <img src="{{ url_for('static', filename='images/home/scanIn.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                              <li>The Print Station enables users to view a final sample image for evaluating the item's placement before proceeding.</li>
+                              <li>The numbers must be scanned using the AutoHotKeys tab. To ensure proper functionality, this station should be opened with Google Chrome and have access to the Everything Folder.</li>
+                              <img src="{{ url_for('static', filename='images/home/scanOut.png') }}" class="img-fluid shadow-sm " alt="Completeful Banner">
+                              <li>Lastly, there is the Scan-Out Station, which serves as the final quality control checkpoint for most orders. Users must ensure that all information in the item image and details is accurate before proceeding further.</li>
+                              <li>A <a href="#warnings" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">confirmation notification</a> will appear for each scanned number. Once confirmed, the shipping label will automatically print for the item, unless the order contains multiple items. In that case, the CubbyHole system is utilized to manage multi-item orders.</li>
+                              </ol>
+                              <a href="{{ url_for('scanIn') }}" class="link-success link-offset-2 link-opacity-75 link-underline-opacity-10 link-underline-opacity-75-hover">Go to the Scan-In Station</a>
+                            </ol>  
+                          </div>
+                        </div>
+          </div>
+        
+      </div>
+    </div> 
+
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='js/home.js') }}"></script> 
+  <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+  </body>
+
+</html>

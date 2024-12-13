@@ -1,0 +1,106 @@
+<!DOCTYPE html>  
+<html lang="en">  
+  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>ShipOut</title>  
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link rel="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shipOut_styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>     
+</head>
+  
+<body>  
+  
+    <header class="text-center">  
+        <!-- Include the navbar -->
+        {% include 'navbar.html' %}
+    </header>  
+    
+     <!-- PASSWORD MODAL -->
+    
+        <!-- BANNER -->
+        <div class="main-container">  
+            <div class="main">
+                <div class="text-center p-4">
+                    <h1>Ship-Out Station</h1>
+                </div>
+            <!-- scan bar -->  
+            <div class="container">
+                <div class="left-container">
+                    <h2>Order Information</h2>
+                    <div class="json-display">
+                        <label for="packageqty" class="label">Items in Package</label>
+                        <div id="packageqty" class="content"></div>
+                    </div>
+                    <div class="json-display">
+                        <label for="item_id" class="label">ID: </label>
+                        <div id="item_id" class="content"></div>
+                    </div>
+                    <div class="json-display">
+                        <label for="sku" class="label">SKU: </label>
+                        <div id="sku" class="content"></div>
+                    </div>
+                    <div class="json-display">
+                        <label for="qty" class="label">QTY: </label>
+                        <div id="qty" class="content"></div>
+                    </div>
+                    
+                </div>
+        
+                <div class="right-container">
+                    <input type="text" id="barcode" class="input-field" placeholder="Scan barcode here" onkeydown="handleScannerInput(event)">
+                    <p id="message"></p>
+                    <div class="image-list-container">
+                        <div class="image-list" id="imageList">
+                            <!-- Images will be appended here dynamically -->
+                        </div>
+                        <button class="button" id="shipButton" onclick="shipbutton()">Ship Order</button>
+                    </div> 
+                </div>
+            </div>
+        <!-- STATUS MODAL -->  
+        <div id="myModal" class="modal">  
+     
+            <div class="modal-content">     
+              <div class="modal-banner">WARNING!</div>
+              <div class="modal-header">  
+                <h5 class="modal-title" id="alreadyScannedModalLabel">Mismatch Stage</h5>  
+              </div>
+              <div class="modal-body">
+              <p id="modal-text"></p>  
+              </div> 
+              <div class="modal-footer">  
+              <span class="close">&times;</span> 
+              </div>
+            </div>  
+          </div>
+
+        <!-- Quantity Modal -->  
+        <div id="quantityModal" class="modal"> 
+
+            <div class="modal-content"> 
+                <div class="confirm-banner">CONFIRM</div>
+                <div class="modal-header">
+                <h5 class="modal-title" id="modal-message"></h5>
+                </div>
+                <div class="modal-footer">
+                <button id="confirmButton" class="confirmButton"></button>  
+                <button id="cancelButton" class="cancelButton"></button> 
+                </div>
+            </div>
+        </div> 
+
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/shipOut.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>  
+</html> 

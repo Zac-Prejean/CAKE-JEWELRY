@@ -1,0 +1,162 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Tally-Page</title>  
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link rel="shortcut icon" type="x-icon" href="{{ url_for('static', filename='images/Completeful Logo Black.svg') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tally_styles.css') }}">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+</head>  
+<header class="text-center">  
+    <!-- NAV -->  
+    <nav style="background-image: none; background-color: #222; border-bottom: 1px solid #e9ecef">  
+        <div class="wrapper">  
+            <div class="cakeLogo">  
+                <a href="#"><img src="{{ url_for('static', filename='images/CakeSiteLogo.svg') }}" alt="Cake Logo"></a>  
+            </div>  
+            <input type="radio" name="slider" id="menu-btn">  
+            <input type="radio" name="slider" id="close-btn">  
+            <ul class="nav-links">  
+                <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>  
+                <li><a href="{{ url_for('home') }}">Home</a></li>  
+                <li><a href="{{ url_for('admin') }}">Admin</a></li>  
+                <li>  
+                    <button id="productionBtn" class="desktop-item production-btn">Production</button>  
+                    <button id="productionBtnMobile" class="mobile-item production-btn">Production</button>  
+                    <div class="mega-box">  
+                        <div class="content">  
+                            <div class="navrow jimjim">  
+                                <img src="{{ url_for('static', filename='images/home/Imwatchingyou_edit.png') }}" class="jimjim" alt="Jimmy is Watching">  
+                            </div>  
+                            <div class="navrow">  
+                                <header class="dropdown-header">PrintLayotLab</header>  
+                                <ul class="mega-links dropdown-links">  
+                                    <li><a class="m-0" href="{{ url_for('precheck') }}">  
+                                        <img src="{{ url_for('static', filename='images/precheck.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Precheck Logo">  
+                                        Precheck</a>  
+                                    </li>  
+                                    <li><a class="m-0" href="{{ url_for('designer') }}">  
+                                        <img src="{{ url_for('static', filename='images/designer.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Template Logo">  
+                                        Designer</a>  
+                                    </li>  
+                                    <li><a class="m-0" href="{{ url_for('templatemerger') }}">  
+                                        <img src="{{ url_for('static', filename='images/template.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Designer Logo">  
+                                        TemplateMerger</a>  
+                                    </li>  
+                                </ul>  
+                            </div>  
+                            <div class="navrow">  
+                                <header class="dropdown-header">ScanStations</header>  
+                                <ul class="mega-links dropdown-links">  
+                                    <li><a href="{{ url_for('scanIn') }}"><img src="{{ url_for('static', filename='images/scanIn.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Scan-In Logo">  
+                                        Scan-In</a>  
+                                    </li>  
+                                    <li><a href="{{ url_for('printStation') }}"><img src="{{ url_for('static', filename='images/printstation.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Print Logo">  
+                                        PrintStation</a>  
+                                    </li>  
+                                    <li><a href="{{ url_for('scanOut') }}"><img src="{{ url_for('static', filename='images/scanOut.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Scan-out Logo">  
+                                        Scan-Out</a>  
+                                    </li>  
+                                </ul>  
+                            </div>  
+                            <div class="navrow">  
+                                <header class="dropdown-header">ShippingStations</header>  
+                                <ul class="mega-links dropdown-links">  
+                                    <li><a href="{{ url_for('cubbysystem') }}"><img src="{{ url_for('static', filename='images/cubbyhole.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="CubbyHole Logo">  
+                                    CubbyHole</a>  
+                                    </li>  
+                                    <li><a href="{{ url_for('shipOut') }}"><img src="{{ url_for('static', filename='images/shipping.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Ship-Out Logo">  
+                                    Ship-Out</a>  
+                                   <li><a href="{{ url_for('tallyPage') }}"><img src="{{ url_for('static', filename='images/tally.svg') }}" width="30" height="30" class="icon d-inline-block align-center" alt="Tally Logo">  
+                                  Tally-Page</a></li>  
+                                  </li>  
+                                </ul>  
+                            </div>  
+                        </div>  
+                    </div>  
+                </li>  
+            </ul>  
+            <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>  
+        </div>  
+    </nav>  
+</header>  
+  
+<body id="tallyPage">  
+    <!-- CONTENT -->  
+    <div class="stats-container">  
+        <div class="bar-container">  
+            <div class="progress-container">  
+                <div class="circle">  
+                    <h3 class="started-text">{{ total_started_today }}</h3>  
+                    <a><img src="{{ url_for('static', filename='images/scanIn.svg') }}" width="30" height="30" class="black icon d-inline-block align-center" alt="Scan-In Logo"></a>  
+                </div>  
+                
+                <div class="circle">  
+                    <h3 class="ended-text">{{ total_ended_today }}</h3>
+                    <a><img src="{{ url_for('static', filename='images/scanOut.svg') }}" width="30" height="30" class="black icon d-inline-block align-center" alt="Scan-In Logo"></a>  
+                </div>  
+            </div>  
+        </div>  
+        <div class="table-container">  
+            <div class="designed-status">  
+                <table class="table table-striped" id="designed-status-table">  
+                    <thead class="table-banner">  
+                        <tr>  
+                            <th>Employee</th>  
+                            <th>Sanded</th>  
+                            <th>Plated</th>  
+                            <th>Engraved</th>  
+                            <th>Hooked</th>  
+                            <th>Sized</th>  
+                            <th>Shipped</th>  
+                            <th>Total</th>  
+                        </tr>  
+                    </thead>  
+                    <tbody>  
+                        {% if tally_data %}  
+                            {% for row in tally_data %}  
+                                <tr>  
+                                    <td>  
+                                        {% if loop.index == 1 %}  
+                                            <span class="dot-gold"></span>  
+                                        {% elif loop.index == 2 %}  
+                                            <span class="dot-silver"></span>  
+                                        {% elif loop.index == 3 %}  
+                                            <span class="dot-bronze"></span>  
+                                        {% endif %}  
+                                        {{ row.employeeName }}  
+                                    </td>  
+                                    <td>{{ row.sandedCheck }}</td>  
+                                    <td>{{ row.qcCheck }}</td>  
+                                    <td>{{ row.engravedCheck }}</td>  
+                                    <td>{{ row.hookedCheck }}</td>  
+                                    <td>{{ row.sizedCheck }}</td>  
+                                    <td>{{ row.shippedCheck }}</td>  
+                                    <td>{{ row.daysTotal }}</td>  
+                                </tr>  
+                            {% endfor %}  
+                        {% else %}  
+                            <tr>  
+                                <td colspan="8" class="text-center">No data available for the selected date.</td>  
+                            </tr>  
+                        {% endif %}  
+                    </tbody>   
+                </table>  
+            </div>  
+        </div>  
+    </div>  
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/tallyPage.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>  
+</body>    
+</html>  

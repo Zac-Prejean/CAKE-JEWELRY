@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="300mm"
+   height="300mm"
+   viewBox="0 0 300 300"
+   version="1.1"
+   id="svg281"
+   sodipodi:docname="ShipStation_color_logo.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview283"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.13055262"
+     inkscape:cx="-2654.1022"
+     inkscape:cy="30.638987"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs278" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="Gear"
+       class="cls-3"
+       d="m 173.07941,299.83965 h -45.5455 l -6.02434,-39.80107 A 113.05068,113.17747 0 0 1 92.993767,248.15051 L 60.632185,272.0598 28.413836,239.83601 52.296345,207.4177 A 112.1813,112.30711 0 0 1 40.482936,178.84941 L 0.7162568,172.85929 V 127.32413 L 40.472694,121.30329 A 113.03022,113.15699 0 0 1 52.296345,92.755505 L 28.413836,60.32691 60.632185,28.082642 92.993767,51.99193 A 112.50859,112.63477 0 0 1 121.50957,40.155053 l 6.02434,-39.8010178 h 45.5455 l 5.98344,39.8010178 a 112.38585,112.5119 0 0 1 28.53626,11.836877 l 32.35132,-23.909288 32.22859,32.244268 -23.88249,32.397867 a 112.8052,112.93172 0 0 1 11.81341,28.547783 l 39.75642,6.05157 v 45.60684 l -39.75642,5.99011 a 112.56996,112.69621 0 0 1 -11.81341,28.55804 l 23.88249,32.40808 -32.21835,32.25453 -32.36156,-23.90929 a 113.09159,113.21843 0 0 1 -28.53626,11.83688 l -5.98344,39.80101 z M 150.29133,100.02556 a 50.015184,50.071277 0 1 0 50.00496,50.06104 50.056094,50.112234 0 0 0 -50.00496,-50.06104 z"
+       style="fill:#00cc66;stroke-width:1.02338;fill-opacity:1" />
+  </g>
+</svg>

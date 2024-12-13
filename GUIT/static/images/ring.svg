@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 800 800"
+   version="1.1"
+   sodipodi:docname="ring.svg"
+   width="800"
+   height="800"
+   inkscape:export-filename="ring.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3386" />
+  <sodipodi:namedview
+     id="namedview3384"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.76327021"
+     inkscape:cx="342.60475"
+     inkscape:cy="307.88572"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <path
+     d="M 79.805554,280.19444 C 119.13889,204.25 245.55556,150 400,150 549.6111,150 673.08334,200.88889 716.47222,273.08333 713.13889,310.63889 682.41666,347.25 631.75,375.47222 578.25,342.52778 487.5,316.66667 400,316.66667 c -88.08333,0 -181.47222,24.52777 -234.61111,57.52777 -50.5,-28 -80.555558,-62.80555 -85.583336,-94 z M 400,483.33333 c -150.11111,0 -276.13889,-46.30555 -333.333335,-114.30555 V 469.44444 C 66.666665,570.69444 213.08334,650 400,650 586.91666,650 733.33334,570.69444 733.33334,469.44444 V 369.02778 C 676.13889,437.02778 550.1111,483.33333 400,483.33333 Z"
+     id="path3381"
+     style="fill:#00cc65;fill-opacity:1;stroke-width:27.7778" />
+</svg>

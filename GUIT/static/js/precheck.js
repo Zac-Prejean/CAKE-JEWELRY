@@ -299,6 +299,10 @@ function generateTableHtml(data) {
                     }             
                     
                 }
+
+                if (row[2].startsWith("NCKGLDCHN01PSCVT") || row[2].startsWith("NCKSILCHN01PSCVT") || row[2].startsWith("NCKRSGCHN01PSCVT")) {
+                    row[3] = `Design: Cervanttis, Personalization: ${line1Value}`;
+                }
       
                 const itemName = row[4];  
                 const monthAbbreviation = getMonthAbbreviationFromItemName(itemName);  

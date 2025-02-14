@@ -7,10 +7,20 @@ function reloadPage() {
 setTimeout(reloadPage, 360000); // 6000 milliseconds = 1 minute  
    
 function searchItemTag(searchValue) {  
-    fetch(`/api/search?query=${encodeURIComponent(searchValue)}`)  
+    // Check if the search value is a valid date  
+    const searchDate = new Date(searchValue);  
+    const isDateSearch = !isNaN(searchDate.getTime());  
+  
+    let apiUrl = `/api/search?query=${encodeURIComponent(searchValue)}`;  
+    if (isDateSearch) {  
+        apiUrl = `/api/search?date=${encodeURIComponent(searchValue)}`;  
+    }  
+  
+    fetch(apiUrl)  
         .then(response => response.json())  
         .then(data => {  
             const tableBody = document.querySelector('#database-table tbody');  
+            const databaseTable = document.querySelector('#database-table');  
             tableBody.innerHTML = '';  
   
             if (data.error) {  
@@ -30,17 +40,17 @@ function searchItemTag(searchValue) {
                 const statusForm = document.createElement('form');  
                 statusForm.action = '/admin_update_status';  
                 statusForm.method = 'POST';  
-              
+  
                 const lineIdInput = document.createElement('input');  
                 lineIdInput.type = 'hidden';  
                 lineIdInput.name = 'line_id';  
                 lineIdInput.value = item.line_id;  
-              
+  
                 const orderIdInput = document.createElement('input');  
                 orderIdInput.type = 'hidden';  
                 orderIdInput.name = 'order_id';  
                 orderIdInput.value = item.order_id;  
-              
+  
                 const statusDropdown = document.createElement('select');  
                 statusDropdown.name = 'status';  
                 statusDropdown.innerHTML = `  
@@ -52,33 +62,52 @@ function searchItemTag(searchValue) {
                     <option value="Shipped" ${item.status === 'Shipped' ? 'selected' : ''}>Shipped</option>  
                     <option value="ERROR" ${item.status === 'ERROR' ? 'selected' : ''}>ERROR</option>  
                 `;  
-              
+  
                 statusForm.appendChild(lineIdInput);  
                 statusForm.appendChild(orderIdInput);  
                 statusForm.appendChild(statusDropdown);  
-              
+  
                 row.innerHTML = `  
                     <td>${item.line_id}</td>  
                     <td>${item.custom_id}</td>  
                     <td>${item.order_id}</td>  
                     <td class="sku-box">${item.sku}</td>  
                 `;  
-              
+  
                 const statusCell = document.createElement('td');  
                 statusCell.appendChild(statusForm);  
                 row.appendChild(statusCell);  
-              
+  
                 row.innerHTML += `  
                     <td>${item.description}</td>  
-                    <td>${item.datetime}</td>  
-                    <td>${item.scannedby}</td>  
+                    <td>${item.datetime}</td>   
                     <td>${item.qty}</td>  
                     <td>${item.cubby}</td>  
                     <td>${item.order_date}</td>  
                 `;  
-              
-                tableBody.appendChild(row);  
-            });     
+  
+                tableBody.appendChild(row); 
+                
+                // Create an additional row for extra fields  
+                const extraRow = document.createElement('tr');  
+                extraRow.classList.add('extra-info-row'); // Add a class for easier targeting  
+                extraRow.innerHTML = `  
+                    <td colspan="10">  
+                        Scanned In: ( ${item.scanned_in} ) -  
+                        Printed: ( ${item.printed} ) -  
+                        Scanned Out: ( ${item.scanned_out} ) -  
+                        Shipped: ( ${item.shipped} )
+                    </td>  
+                `;  
+                tableBody.appendChild(extraRow);  
+            }); 
+  
+            // Show the table if data is found  
+            if (data.length > 0) {  
+                databaseTable.style.display = 'table';  
+            } else {  
+                databaseTable.style.display = 'none';  
+            }  
   
             // Attach event listener to delete buttons  
             document.querySelectorAll('.delete-button').forEach(button => {  
@@ -120,8 +149,7 @@ function searchItemTag(searchValue) {
             tableBody.innerHTML = `<tr><td colspan="10">Error: ${error.message}</td></tr>`;  
         });  
 }  
-
-
+ 
 function showPasswordModal() {  
     return new Promise((resolve, reject) => {  
       const passwordModal = new bootstrap.Modal(  
@@ -246,57 +274,6 @@ function getBackgroundColor(status) {
   }  
 }  
 
-// document.addEventListener('DOMContentLoaded', function() {  
-//   // Check if you are on the admin page  
-//   if (document.getElementById('admin-page')) {  
-//       showPasswordModal()  
-//           .then(password => {  
-//               return checkPassword(password);  
-//           })  
-//           .then(() => {  
-//               // The password is correct, display the content container and initialize your admin page here  
-//               document.querySelector('.content-container').style.display = 'block';  
-                
-//               // Attach event listener to status dropdowns  
-//               document.querySelectorAll('select[name="status"]').forEach(select => {  
-//                   const updateDropdownBackgroundColor = () => {  
-//                       const selectedOption = select.options[select.selectedIndex];  
-//                       select.style.backgroundColor = getBackgroundColor(selectedOption.value);  
-//                   };  
-
-//                   // Initial background color setting  
-//                   updateDropdownBackgroundColor();  
-
-//                   select.addEventListener('change', function() {  
-//                       const form = this.closest('form');  
-//                       const formData = new FormData(form);  
-//                       fetch(form.action, {  
-//                           method: 'POST',  
-//                           body: formData  
-//                       })  
-//                       .then(response => response.json())  
-//                       .then(data => {  
-//                           if (data.error) {  
-//                               console.error('Error updating status:', data.error);  
-//                           } else {  
-//                               console.log('Status updated successfully');  
-//                               // Optionally, update the UI to reflect the new status  
-//                           }  
-//                       })  
-//                       .catch(error => {  
-//                           console.error('Error updating status:', error);
-                            
-//                       });  
-//                       updateDropdownBackgroundColor();  
-//                   });  
-//               });  
-//           })  
-//           .catch(() => {  
-//               // The password is incorrect or not entered, the user is redirected to the home route  
-//               window.location.href = '/';  
-//           });  
-//   }  
-
 document.addEventListener('DOMContentLoaded', function() {  
     // Check if you are on the admin page  
     if (document.getElementById('admin-page')) {  
@@ -338,8 +315,6 @@ document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('passwordInput').value = '';  
       });  
   }  
-
- 
 
 document.addEventListener('DOMContentLoaded', function() {  
   // Check if the main element exists  
@@ -499,20 +474,4 @@ function attachEventListenersToStatusDropdowns() {
     });  
 }  
 
-function filterByDate() {  
-    const startDate = document.getElementById('startDate').value;  
-    const endDate = document.getElementById('endDate').value;  
-  
-    const tableRows = document.querySelectorAll('#database-table tbody tr');  
-  
-    tableRows.forEach(row => {  
-        const orderDate = row.querySelector('td:nth-child(10)').innerText; // Adjust the index if needed  
-        const orderDateObj = new Date(orderDate);  
-  
-        if ((startDate && orderDateObj < new Date(startDate)) || (endDate && orderDateObj > new Date(endDate))) {  
-            row.style.display = 'none';  
-        } else {  
-            row.style.display = '';  
-        }  
-    });  
-}  
+

@@ -1,10 +1,13 @@
 /* NavBar */
 
-  nav {
-    width: 100%; 
-    background-image: url("../images/Banner-02.png");
-    background-color: #E65EA4;
-  }
+  nav {  
+    width: 100%;  
+    background-image: url("../images/Banner-02.png");  
+    background-color: #E65EA4;  
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+  } 
   nav .wrapper {
     position: relative;
     padding: 10px 30px;

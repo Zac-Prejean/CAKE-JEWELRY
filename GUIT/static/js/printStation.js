@@ -53,7 +53,7 @@ $(document).ready(function() {
             error: function(xhr) {  
                 var error = JSON.parse(xhr.responseText);  
                 if (error.status) {  
-                    document.getElementById("modal-text").innerHTML = `This item has processed the <a href="#" class="status-link">${error.status}</a> stage. Check with supervisor.`;  
+                    document.getElementById("modal-text").innerHTML = `This item was last processed in the <a href="#" class="status-link">${error.status}</a> stage. Check with supervisor.`;  
                     $('#warningModal').modal('show');  
                 } else {  
                     console.error('Error:', error);  
@@ -67,9 +67,10 @@ $(document).ready(function() {
   
     function updateImageBasedOnSKU(sku) {  
         console.log("Updating image based on SKU:", sku);  
-        var imgElement = $('#scanImage');  
+        var imgElement = $('#scanImage');
+        var placeholderContainer = $('#placeholder-container');  
         var imagePath = '';  
-      
+  
         if (sku.startsWith("NCKGLD") || sku.startsWith("NCKSIL") || sku.startsWith("NCKRSG")) {  
             imagePath = urls.nck1Image;  
         } else if (sku.startsWith('NCK02')) {  
@@ -87,11 +88,12 @@ $(document).ready(function() {
         } else {  
             imagePath = urls.ppImage;  
         }  
-      
+  
         console.log("Setting image src to:", imagePath);  
         imgElement.attr('src', imagePath);  
-        imgElement.show(); // Ensure the image is displayed  
-    }        
+        imgElement.show(); // Ensure the image is displayed
+        placeholderContainer.hide(); // Hide the placeholder text  
+    }  
   
     function clearDisplayFields() {  
         $('#sku').text('');  
@@ -100,7 +102,8 @@ $(document).ready(function() {
         $('#item_id').text('');  
         $('#order_id').text('');  
         $('#scanImage').hide();  
-    }  
+        $('#placeholder-container').show();
+    } 
   
     $('#scanForm1').on('submit', handleScanFormSubmit);  
     $('#scanForm2').on('submit', handleScanFormSubmit);  

@@ -423,3 +423,7 @@ function completeBox(boxNumber) {
         }  
     });  
 }
+
+$(document).ready(function(){  
+    $('[data-toggle="tooltip"]').tooltip();   
+});  

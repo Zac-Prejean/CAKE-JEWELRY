@@ -6,9 +6,16 @@
   width: 40vw;
 }
 
-.banner-container{
-  padding: 50px 40px 30px;
-} 
+
+.cubby-banner{
+  padding: 40px 40px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.help-bar{
+  display: flex;
+}
 
 /* CUBBY BOXES */
 .box-container {
@@ -130,6 +137,9 @@
 @media screen and (max-width: 860px) {
   .cubby-search-bar {
       width: 75vw;
+  }
+  .help-bar{
+    display: none;
   }
   .banner-container {  
       display: flex;  

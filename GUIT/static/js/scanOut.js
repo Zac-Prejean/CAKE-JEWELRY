@@ -86,7 +86,7 @@ $(document).ready(function() {
             error: function(xhr) {  
                 var error = JSON.parse(xhr.responseText);  
                 if (error.status) {  
-                    document.getElementById("modal-text").innerHTML = `This item has processed the <a href="#" class="status-link">${error.status}</a> stage. Check with supervisor.`;  
+                    document.getElementById("modal-text").innerHTML = `This item was last processed in the <a href="#" class="status-link">${error.status}</a> stage. Check with supervisor.`;  
                     $('#warningModal').modal({  
                         backdrop: 'static',  
                         keyboard: false  
@@ -103,7 +103,8 @@ $(document).ready(function() {
   
     function updateImageBasedOnSKU(sku) {  
         console.log("Updating image based on SKU:", sku);  
-        var imgElement = $('#scanImage');  
+        var imgElement = $('#scanImage');
+        var placeholderContainer = $('#placeholder-container');  
         var imagePath = '';  
   
         if (sku.startsWith("NCKGLD") || sku.startsWith("NCKSIL") || sku.startsWith("NCKRSG")) {  
@@ -126,7 +127,8 @@ $(document).ready(function() {
   
         console.log("Setting image src to:", imagePath);  
         imgElement.attr('src', imagePath);  
-        imgElement.show(); // Ensure the image is displayed  
+        imgElement.show(); // Ensure the image is displayed
+        placeholderContainer.hide(); // Hide the placeholder text  
     }  
   
     function clearDisplayFields() {  
@@ -136,7 +138,8 @@ $(document).ready(function() {
         $('#item_id').text('');  
         $('#order_id').text('');  
         $('#scanImage').hide();  
-    }  
+        $('#placeholder-container').show();
+    }   
   
     // Disable submit button when a modal is shown  
     $('.modal').on('shown.bs.modal', function() {  
@@ -243,12 +246,13 @@ $(document).ready(function() {
   
         shipButton.onclick = async function() {  
             if (orderNumber) {  
-                document.getElementById("modal-message").innerHTML = `Order Number: <a href="https://app.skulabs.com/order?store_id=66578a3a08851e1cf8e5cfcb&order_number=${orderNumber}" target="_blank">${orderNumber}</a>`;  
-                shipButton.style.display = "none";  
+                // document.getElementById("modal-message").innerHTML = `Order Number: <a href="https://app.skulabs.com/order?store_id=66578a3a08851e1cf8e5cfcb&order_number=${orderNumber}" target="_blank">${orderNumber}</a>`;  
+                // shipButton.style.display = "none";  
   
-                if (typeof onClose === 'function') {  
-                    await onClose();  
-                }  
+                // if (typeof onClose === 'function') {  
+                //     await onClose();  
+                // }  
+                $(modal).modal("hide");
             } else {  
                 if (addedItems.includes(itemId)) {  
                     // Display a warning modal when the item is already added  
@@ -355,4 +359,8 @@ $(document).ready(function() {
             $(boxNumberModal).modal("hide");  
         };  
     }  
+}); 
+
+$(document).ready(function(){  
+    $('[data-toggle="tooltip"]').tooltip();   
 });  

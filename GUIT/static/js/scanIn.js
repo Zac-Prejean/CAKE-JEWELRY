@@ -53,7 +53,7 @@ $(document).ready(function() {
             error: function(xhr) {  
                 var error = JSON.parse(xhr.responseText);  
                 if (error.status) {  
-                    document.getElementById("modal-text").innerHTML = `This item has processed the <a href="#" class="status-link">${error.status}</a> stage. Check with supervisor.`;  
+                    document.getElementById("modal-text").innerHTML = `This item was last processed in the <a href="#" class="status-link">${error.status}</a> stage. Check with supervisor.`;  
                     $('#warningModal').modal('show');  
                 } else {  
                     console.error('Error:', error);  

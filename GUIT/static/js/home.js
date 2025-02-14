@@ -72,3 +72,7 @@ function getImageSource(date) {
   document.addEventListener('DOMContentLoaded', function () {  
     updateImageSource();  
   }); 
+
+  $(document).ready(function(){  
+    $('[data-toggle="tooltip"]').tooltip();   
+});  

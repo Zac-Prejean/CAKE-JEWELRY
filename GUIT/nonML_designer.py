@@ -7,8 +7,6 @@ from io import BytesIO
 from datetime import datetime
 from PIL import UnidentifiedImageError    
 
-timestamp = datetime.now().strftime("%Y%m%d%H%M")
-
 def process_personalization_text(text, clean_sku):      
     lines = [line for line in text.split('\n') if line.strip()]      
     lines = [re.sub(r'(line \d+: ?|name[s]?: ?|title[s]?: ?|top name[s]?: ?|bottom name[s]?: ?|kids name[s]?: ?)', '', line, flags=re.IGNORECASE).strip('\r') for line in lines]      
@@ -221,6 +219,7 @@ def draw_text_with_kerning(draw, x, y, kerned_text, fill, font):
         x_offset += font.getlength(char) + kerning
 
 def process_row(index, row, folder_name, sku, clean_sku, qty_index, load_font):  
+    timestamp = datetime.now().strftime("%Y.%m.%d.%H.%M")
     print(f"Processing row: {index}, clean_sku: {clean_sku}")  
     sku = row['Item - SKU']  
     order_number = str(row['Order - Number']).strip('"')  

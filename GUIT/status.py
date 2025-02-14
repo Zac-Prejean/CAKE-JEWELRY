@@ -21,8 +21,11 @@ def add_status(row, customtagID):
     qty = row['Item - Qty']  
     sku = row['Item - SKU']  
     description = row['Item - Options']  
-    order_date = row['Order - Date']  
-    scannedby = '-'  
+    order_date = row['Order - Date']
+    scanned_in = '-'
+    printed = '-' 
+    scanned_out = '-'
+    shipped = '-'   
     datetime_now = datetime.now().strftime('%Y-%m-%d %H:%M')  
     cubby = ''  
     total_qty = row['Total Order Qty']  
@@ -50,10 +53,10 @@ def add_status(row, customtagID):
             return  
   
         insert_query = '''  
-        INSERT INTO cake.JEWELRY_STATUS (line_id, order_id, sku, description, qty, status, cubby, order_date, scannedby, [datetime], custom_id, total_qty)  
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+        INSERT INTO cake.JEWELRY_STATUS (line_id, order_id, sku, description, qty, status, cubby, order_date, scanned_in, printed, scanned_out, shipped, [datetime], custom_id, total_qty)  
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
         '''  
-        query_params = (line_id, order_id, sku, description, qty, 'Batched', cubby, order_date, scannedby, datetime_now, custom_id_value, total_qty)  
+        query_params = (line_id, order_id, sku, description, qty, 'Batched', cubby, order_date, scanned_in, printed, scanned_out, shipped, datetime_now, custom_id_value, total_qty)  
   
         cursor.execute(insert_query, query_params)  
         conn.commit()  
@@ -73,7 +76,10 @@ def add_status_combined(items, combined_qty, customtagID, line_id_combined="-"):
         sku = row['Item - SKU']  
         description = row['Item - Options']  
         order_date = row['Order - Date']  
-        scannedby = '-'  
+        scanned_in = '-'
+        printed = '-' 
+        scanned_out = '-'
+        shipped = '-'  
         datetime_now = datetime.now().strftime('%Y-%m-%d %H:%M')  
         cubby = ''  
         total_qty = row['Total Order Qty']  
@@ -97,10 +103,10 @@ def add_status_combined(items, combined_qty, customtagID, line_id_combined="-"):
                 return  
   
             insert_query = '''  
-            INSERT INTO cake.JEWELRY_STATUS (line_id, order_id, sku, description, qty, status, cubby, order_date, scannedby, [datetime], custom_id, total_qty)  
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+            INSERT INTO cake.JEWELRY_STATUS (line_id, order_id, sku, description, qty, status, cubby, order_date, scanned_in, printed, scanned_out, shipped, [datetime], custom_id, total_qty)  
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
             '''  
-            query_params = (line_id, order_id, sku, description, combined_qty, 'Batched', cubby, order_date, scannedby, datetime_now, custom_id_value, total_qty)  
+            query_params = (line_id, order_id, sku, description, combined_qty, 'Batched', cubby, order_date, scanned_in, printed, scanned_out, shipped, datetime_now, custom_id_value, total_qty)  
   
             cursor.execute(insert_query, query_params)  
             conn.commit()  
@@ -110,8 +116,7 @@ def add_status_combined(items, combined_qty, customtagID, line_id_combined="-"):
         finally:  
             cursor.close()  
             conn.close()  
-     
-   
+       
 def get_connection():  
     try:  
         conn = odbc.connect(connection_string)  
@@ -186,11 +191,11 @@ def init_status_routes(app):
         try:  
             cursor = conn.cursor()  
             if line_id:  
-                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scannedby, [datetime], custom_id, total_qty  
+                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scanned_in, printed, scanned_out, shipped, [datetime], custom_id, total_qty  
                         FROM cake.JEWELRY_STATUS WHERE line_id = ?"""  
                 cursor.execute(query, (line_id.replace('.0', ''),))  
             elif custom_id:  
-                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scannedby, [datetime], custom_id, total_qty  
+                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scanned_in, printed, scanned_out, shipped, [datetime], custom_id, total_qty  
                         FROM cake.JEWELRY_STATUS WHERE custom_id = ?"""  
                 cursor.execute(query, (custom_id,))  
             else:  
@@ -200,25 +205,31 @@ def init_status_routes(app):
             if result:  
                 current_status = result[5]  
                 reason_string = 'SCAN STATION'  
-                total_qty = result[11]  
+                total_qty = result[14]  
     
                 if station == 'scanIn':  
                     expected_status = 'Batched'  
-                    new_status = 'Scanned-In'  
-                    tag = 'C_Scanned in'  
+                    new_status = 'Scanned-In' 
+                    scanned_in = signedInEmployeeName 
+                    tag = 'C_Scanned in' 
+                    update_query = """UPDATE cake.JEWELRY_STATUS SET status = ?, [datetime] = ?, scanned_in = ?, cubby = ? WHERE line_id = ?"""   
                 elif station == 'printStation':  
                     expected_status = 'Scanned-In'  
-                    new_status = 'Printed'  
-                    tag = 'C_Assembly'  
+                    new_status = 'Printed'
+                    printed = signedInEmployeeName  
+                    tag = 'C_Assembly'
+                    update_query = """UPDATE cake.JEWELRY_STATUS SET status = ?, [datetime] = ?, printed = ?, cubby = ? WHERE line_id = ?"""     
                 elif station == 'scanOut':  
                     if total_qty > 1:  
                         expected_status = 'Printed'  
-                        new_status = 'Cubby'  
-                        tag = 'C_Scan out'  
+                        new_status = 'Cubby'   
                     else:  
                         expected_status = 'Printed'  
-                        new_status = 'Scanned-Out'  
-                        tag = 'C_Scan out'  
+                        new_status = 'Scanned-Out'
+                    
+                    scanned_out = signedInEmployeeName
+                    tag = 'C_Scan out'
+                    update_query = """UPDATE cake.JEWELRY_STATUS SET status = ?, [datetime] = ?, scanned_out = ?, cubby = ? WHERE line_id = ?"""     
                 else:  
                     return jsonify({'error': 'Invalid station type'}), 400  
     
@@ -231,7 +242,6 @@ def init_status_routes(app):
                     }), 400  
     
                 # Update only the specific line_id  
-                update_query = """UPDATE cake.JEWELRY_STATUS SET status = ?, [datetime] = ?, scannedby = ?, cubby = ? WHERE line_id = ?"""  
                 datetime_now = datetime.now().strftime('%Y-%m-%d %H:%M')  
                 datetime_date = datetime.now().strftime('%Y-%m-%d')  
                 cursor.execute(update_query, (new_status, datetime_now, signedInEmployeeName, cubbyID, result[0]))  
@@ -383,10 +393,13 @@ def init_status_routes(app):
                     'status': new_status,  
                     'cubby': cubbyID,  
                     'order_date': result[7],  
-                    'scannedby': signedInEmployeeName,  
+                    'scanned_in': result[8],  
+                    'printed': result[9],  
+                    'scanned_out': result[10],  
+                    'shipped': result[11],  
                     'datetime': datetime_now,  
-                    'custom_id': result[10],  
-                    'total_qty': result[11]  
+                    'custom_id': result[13],  
+                    'total_qty': result[14]  
                 })  
             else:  
                 return jsonify({'error': 'No matching record found'}), 404  
@@ -395,7 +408,15 @@ def init_status_routes(app):
             return jsonify({'error': 'Database query failed'}), 500  
         finally:  
             cursor.close()  
-            conn.close()    
+            conn.close() 
+
+
+
+
+
+
+
+
 
     @app.route('/override_status', methods=['POST'])  
     def override_status():  
@@ -420,10 +441,10 @@ def init_status_routes(app):
         try:  
             cursor = conn.cursor()  
             if line_id:  
-                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scannedby, datetime, custom_id FROM cake.JEWELRY_STATUS WHERE line_id = ?"""  
+                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scanned_in, datetime, custom_id FROM cake.JEWELRY_STATUS WHERE line_id = ?"""  
                 cursor.execute(query, (line_id.replace('.0', ''),))  
             elif custom_id:  
-                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scannedby, datetime, custom_id FROM cake.JEWELRY_STATUS WHERE custom_id = ?"""  
+                query = """SELECT line_id, order_id, sku, description, qty, status, cubby, order_date, scanned_in, datetime, custom_id FROM cake.JEWELRY_STATUS WHERE custom_id = ?"""  
                 cursor.execute(query, (custom_id,))  
             else:  
                 return jsonify({'error': 'No line_id or custom_id provided'}), 400  
@@ -433,7 +454,7 @@ def init_status_routes(app):
                 # Print all information retrieved from the database  
                 print(f"Retrieved Data: Line ID: {result[0]}, Order ID: {result[1]}, SKU: {result[2]}, Description: {result[3]}, Qty: {result[4]}, Status: {result[5]}, Cubby: {result[6]}, Order Date: {result[7]}, Scanned By: {result[8]}, Datetime: {result[9]}, Custom ID: {result[10]}")  
   
-                update_query = """UPDATE cake.JEWELRY_STATUS SET status = ?, datetime = ?, scannedby = ? WHERE line_id = ?"""  
+                update_query = """UPDATE cake.JEWELRY_STATUS SET status = ?, datetime = ?, scanned_in = ? WHERE line_id = ?"""  
                 datetime_now = datetime.now().strftime('%Y-%m-%d %H:%M')  
                 new_status = 'Scanned-In'  
                 cursor.execute(update_query, (new_status, datetime_now, signedInEmployeeName, result[0]))  
@@ -447,12 +468,15 @@ def init_status_routes(app):
                     'description': result[3],  
                     'qty': result[4],  
                     'status': new_status,  
-                    'cubby': result[6],  
+                    'cubby': result[6], 
                     'order_date': result[7],  
-                    'scannedby': signedInEmployeeName,  
+                    'scanned_in': result[8],
+                    'printed': result[9],
+                    'scanned_out': result[10],
+                    'shipped': result[11],    
                     'datetime': datetime_now,  
-                    'custom_id': result[10],
-                    'total_qty': result[11] 
+                    'custom_id': result[13],  
+                    'total_qty': result[14]  
                 })  
             else:  
                 return jsonify({'error': 'No matching record found'}), 404  

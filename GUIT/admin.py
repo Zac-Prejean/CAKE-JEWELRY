@@ -9,30 +9,21 @@ username = 'JoeF'
 password = 'SEg4FFFoQUP*5Fi**rD#kh3'  
 connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'  
   
-PRODUCTION_DB_FILE = os.path.join(DB_DIR, 'Employee.db', 'production.db')  
-ADMIN_DB_FILE = os.path.join(DB_DIR, 'Employee.db', 'admin.db')  
-  
-# Database setup for production and admin  
-production_db_engine = create_engine(f'sqlite:///{PRODUCTION_DB_FILE}')  
-admin_db_engine = create_engine(f'sqlite:///{ADMIN_DB_FILE}')  
-AdminSession = sessionmaker(bind=admin_db_engine)  
+# SQLAlchemy setup  
 Base = declarative_base()  
+engine = create_engine(f'mssql+pyodbc://{username}:{password}@{server}/{database}?driver=SQL+Server')  
+Session = sessionmaker(bind=engine)  
   
-class AdminUser(Base):  
-    __tablename__ = 'admin_users'  
+# Define models if needed (Example for AdminUser)  
+class Employee(Base):  
+    __tablename__ = 'CAKE_EMPLOYEE'  
     id = Column(Integer, primary_key=True)  
     name = Column(String, nullable=False)  
-    password = Column(String, nullable=False)  
-  
-class ProductionUser(Base):  
-    __tablename__ = 'production_users'  
-    id = Column(Integer, primary_key=True)  
-    name = Column(String, nullable=False)  
-    password = Column(String, nullable=False)  
-  
-# Creating sessions for admin and production databases  
-AdminSession = sessionmaker(bind=admin_db_engine)  
-ProductionSession = sessionmaker(bind=production_db_engine)  
+    title = Column(String, nullable=False)  
+    passcode = Column(String, nullable=False)  
+    department = Column(String, nullable=False)  
+    category = Column(String, nullable=False)  
+    access = Column(Integer, nullable=False)  
   
 def get_connection():  
     try:  
@@ -52,7 +43,7 @@ def get_all_status():
         if tags:  
             tag_list = []  
             for tag in tags:  
-                line_id, order_id, custom_id, sku, description, qty, status, cubby, order_date, scannedby, datetime, total_qty = tag  
+                line_id, order_id, custom_id, sku, description, qty, status, cubby, order_date, scanned_in, printed, scanned_out, shipped, datetime, total_qty = tag  
                 # Check if line_id contains multiple values  
                 if ',' in str(line_id):  
                     line_id = "MULTI"  
@@ -65,8 +56,11 @@ def get_all_status():
                     "qty": qty,  
                     "status": status,  
                     "cubby": cubby,  
-                    "order_date": order_date,  
-                    "scannedby": scannedby,  
+                    "order_date": order_date, 
+                    "scanned_in": scanned_in,  
+                    "printed": printed,  
+                    "scanned_out": scanned_out,  
+                    "shipped": shipped, 
                     "datetime": datetime,  
                     "total_qty": total_qty  
                 })  
@@ -122,13 +116,15 @@ def init_admin_routes(app):
             for single_line_id in line_id_list:  
                 print(f"Updating line_id: {single_line_id.strip()}")  
                 query = """  
-                UPDATE cake.JEWELRY_STATUS  
-                SET status = ?, [datetime] = ?, scannedby = ?  
+                UPDATE cake.JEWELRY_STATUS 
+                SET status = ?, [datetime] = ?, scanned_in= ?, printed= ?, scanned_out = ?  
                 WHERE line_id = ? AND order_id = ?  
                 """  
                 datetime_now = datetime.now().strftime('%Y-%m-%d %H:%M')  
-                scannedby = 'Admin'  # Or fetch from session if user-specific  
-                cursor.execute(query, (new_status, datetime_now, scannedby, single_line_id.strip(), order_id))  
+                scanned_in = 'Admin'  # Or fetch from session if user-specific  
+                printed = 'Admin'
+                scanned_out = 'Admin'
+                cursor.execute(query, (new_status, datetime_now, scanned_in, printed, scanned_out, single_line_id.strip(), order_id))  
             
             conn.commit()  
             return jsonify({"message": "Status updated successfully"}), 200  
@@ -143,30 +139,42 @@ def init_admin_routes(app):
   
     @app.route('/api/search', methods=['GET'])  
     def search():  
+        # Get the query and date parameters  
         query = request.args.get('query', '').strip().lower()  
-        if not query:  
-            return jsonify({'error': 'Query is required'}), 400  
+        date_query = request.args.get('date', '').strip().lower()  
+    
+        # Check if neither query nor date is provided  
+        if not query and not date_query:  
+            return jsonify({'error': 'Query or date is required'}), 400  
     
         conn = get_connection()  
+    
         try:  
             cursor = conn.cursor()  
-            query_string = """  
-                SELECT * FROM cake.JEWELRY_STATUS  
-                WHERE LOWER(CAST(line_id AS varchar(max))) LIKE ? OR  
-                    LOWER(CAST(order_id AS varchar(max))) LIKE ? OR  
-                    LOWER(CAST(custom_id AS varchar(max))) LIKE ? OR  
-                    LOWER(CAST(sku AS varchar(max))) LIKE ? OR  
-                    LOWER(CAST(status AS varchar(max))) LIKE ? OR  
-                    LOWER(CAST(description AS varchar(max))) LIKE ?  
-            """  
-            search_query = f"%{query}%"  
-            cursor.execute(query_string, (search_query, search_query, search_query, search_query, search_query, search_query))  
-            results = cursor.fetchall()  
+            if query:  
+                query_string = """  
+                    SELECT * FROM cake.JEWELRY_STATUS 
+                    WHERE LOWER(CAST(line_id AS varchar(max))) LIKE ? OR  
+                        LOWER(CAST(order_id AS varchar(max))) LIKE ? OR  
+                        LOWER(CAST(custom_id AS varchar(max))) LIKE ? OR  
+                        LOWER(CAST(sku AS varchar(max))) LIKE ? OR  
+                        LOWER(CAST(status AS varchar(max))) LIKE ? OR  
+                        LOWER(CAST(description AS varchar(max))) LIKE ?  
+                """  
+                search_query = f"%{query}%"  
+                cursor.execute(query_string, (search_query, search_query, search_query, search_query, search_query, search_query))  
+            elif date_query:  
+                query_string = """  
+                    SELECT * FROM cake.JEWELRY_STATUS 
+                    WHERE CAST(order_date AS DATE) = ?  
+                """  
+                cursor.execute(query_string, (date_query,))  
     
+            results = cursor.fetchall()  
             if results:  
                 results_list = []  
                 for row in results:  
-                    line_id, order_id, custom_id, sku, description, qty, status, cubby, order_date, scannedby, datetime, total_qty = row  
+                    line_id, order_id, custom_id, sku, description, qty, status, cubby, order_date, scanned_in, printed, scanned_out, shipped, datetime, total_qty = row  
                     results_list.append({  
                         "line_id": line_id,  
                         "custom_id": custom_id,  
@@ -177,7 +185,10 @@ def init_admin_routes(app):
                         "status": status,  
                         "cubby": cubby,  
                         "order_date": order_date,  
-                        "scannedby": scannedby,  
+                        "scanned_in": scanned_in,  
+                        "printed": printed,  
+                        "scanned_out": scanned_out,  
+                        "shipped": shipped,  
                         "datetime": datetime,  
                         "total_qty": total_qty  
                     })  
@@ -190,19 +201,18 @@ def init_admin_routes(app):
         finally:  
             if conn:  
                 cursor.close()  
-                conn.close()  
+                conn.close() 
 
     @app.route('/check_password', methods=['POST'])  
     def check_password():  
-        password = request.json.get('password', '').strip()
-        admin_session = AdminSession()  
-  
+        password = request.json.get('password', '').strip()  
+        session = Session()  
         try:  
-            admin_user = admin_session.execute(  
-                text("SELECT * FROM IDCards WHERE EmployeeNumber = :password"), {'password': password}  
+            employee = session.execute(  
+                text("SELECT * FROM cake.CAKE_EMPLOYEE WHERE passcode = :password"),  
+                {'password': password}  
             ).fetchone()  
-  
-            if admin_user:  
+            if employee and employee.access in [1, 2]:  # Admin access levels  
                 print("Password check successful")  
                 return jsonify({"result": "success"})  
             else:  
@@ -212,29 +222,20 @@ def init_admin_routes(app):
             print(f"Error during password check: {e}")  
             return jsonify({"error": str(e)}), 500  
         finally:  
-            admin_session.close()  
+            session.close()  
   
     @app.route('/signin', methods=['POST'])  
     def signin():  
         employee_id = request.json.get('employeeID', '').strip()  
-        admin_session = AdminSession()  
-        production_session = ProductionSession()  
-  
+        session = Session()  
         try:  
-            admin_user = admin_session.execute(  
-                text("SELECT * FROM IDCards WHERE EmployeeNumber = :password"), {'password': employee_id}  
+            employee = session.execute(  
+                text("SELECT * FROM cake.CAKE_EMPLOYEE WHERE passcode = :password"),  
+                {'password': employee_id}  
             ).fetchone()  
-  
-            production_user = production_session.execute(  
-                text("SELECT * FROM IDCards WHERE EmployeeNumber = :password"), {'password': employee_id}  
-            ).fetchone()  
-  
-            if admin_user:  
-                print(f"Admin user signed in: {admin_user[1]}")  # Access by index  
-                return jsonify({"result": "success", "employeeName": admin_user[1]})  
-            elif production_user:  
-                print(f"Production user signed in: {production_user[1]}")  # Access by index  
-                return jsonify({"result": "success", "employeeName": production_user[1]})  
+            if employee:  
+                print(f"User signed in: {employee.name}")  
+                return jsonify({"result": "success", "employeeName": employee.name})  
             else:  
                 print("Sign-in failed")  
                 return jsonify({"result": "failure"})  
@@ -242,8 +243,7 @@ def init_admin_routes(app):
             print(f"Error during sign-in: {e}")  
             return jsonify({"error": str(e)}), 500  
         finally:  
-            admin_session.close()  
-            production_session.close()  
+            session.close()    
   
     @app.route('/delete_item', methods=['POST'])  
     def delete_item():  

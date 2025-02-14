@@ -208,7 +208,7 @@ def init_cubby_routes(app):
             cursor = conn.cursor()  
             # Fetch data from JEWELRY_STATUS using the scanned number as itemID  
             query = """SELECT line_id, order_id, sku, qty, order_date, total_qty  
-                    FROM cake.JEWELRY_STATUS  
+                    FROM cake.JEWELRY_STATUS 
                     WHERE line_id = ? OR custom_id = ?"""  
             cursor.execute(query, (scanned_number, scanned_number))  
             result = cursor.fetchone()  
@@ -222,7 +222,7 @@ def init_cubby_routes(app):
                 if cubbyID is None:  
                     return jsonify({'error': 'Failed to create cubby'}), 500  
                 # Update JEWELRY_STATUS with the new cubbyID  
-                update_query = """UPDATE cake.JEWELRY_STATUS  
+                update_query = """UPDATE cake.JEWELRY_STATUS 
                                 SET cubby = ?  
                                 WHERE line_id = ?"""  
                 cursor.execute(update_query, (cubbyID, line_id))  
